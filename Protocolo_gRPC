@@ -1,0 +1,31 @@
+// sistema.proto
+
+syntax = "proto3";
+
+service Sistema {
+    rpc AdmitirPaciente(PacienteRequest) returns (PacienteResponse) {}
+    rpc AssociarPulseira(PulseiraRequest) returns (PulseiraResponse) {}
+    rpc QuadroDeHorarios(QuadroRequest) returns (QuadroResponse) {}
+    rpc AltaDePaciente(AltaRequest) returns (AltaResponse) {}
+}
+
+message PacienteRequest {
+    string registro = 1;
+    string nome_completo = 2;
+    repeated string comorbidades = 3;
+    int32 basal_pressao_min = 4;
+    int32 basal_pressao_max = 5;
+    int32 basal_saturacao_min = 6;
+    int32 basal_saturacao_max = 7;
+    int32 basal_fc_min = 8;
+    int32 basal_fc_max = 9;
+    repeated string medicacoes_continuas = 10;
+}
+
+message PacienteResponse {
+    string registro = 1;
+    string nome_completo = 2;
+    // Adicione outros campos necessários para resposta
+}
+
+// Definir mensagens e respostas para outros métodos (AssociarPulseira, QuadroDeHorarios, AltaDePaciente)
