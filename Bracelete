@@ -1,0 +1,27 @@
+# pulseira.py
+
+import random
+import time
+
+class Pulseira:
+    def __init__(self, identificador, tempo_programado, id_paciente):
+        self.identificador = identificador
+        self.tempo_programado = tempo_programado
+        self.id_paciente = id_paciente
+
+    def coletar_dados_vitais(self):
+        dados = {
+            'identificador': self.identificador,
+            'id_paciente': self.id_paciente,
+            'pressao_sistolica': random.randint(100, 140),
+            'pressao_diastolica': random.randint(60, 90),
+            'batimentos_cardiacos': random.randint(60, 100),
+            'saturacao': random.randint(95, 100),
+            'ecg': self.simular_ecg(),
+            'timestamp': int(time.time())
+        }
+        return dados
+
+    def simular_ecg(self):
+        ecg_data = [random.randint(200, 1000) for _ in range(100)]
+        return ecg_data
