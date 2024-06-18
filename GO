@@ -1,0 +1,60 @@
+// main.go
+
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+    "time"
+
+    pb "caminho/para/seu/arquivo/proto"  // Caminho para o seu arquivo .proto
+
+    "google.golang.org/grpc"
+)
+
+const (
+    address = "localhost:50051"  // Endereço do servidor gRPC Python
+)
+
+func main() {
+    conn, err := grpc.Dial(address, grpc.WithInsecure())
+    if err != nil {
+        log.Fatalf("Não foi possível conectar: %v", err)
+    }
+    defer conn.Close()
+
+    c := pb.NewSistemaClient(conn)
+
+    // Exemplo de utilização do cliente gRPC
+    registroPaciente := "P001"
+    nomeCompleto := "José Silva"
+    comorbidades := []string{"Diabetes"}
+    basalPressaoMin := int32(90)
+    basalPressaoMax := int32(130)
+    basalSaturacaoMin := int32(92)
+    basalSaturacaoMax := int32(98)
+    basalFCMin := int32(65)
+    basalFCMax := int32(95)
+    medicacoesContinuas := []string{"Insulina"}
+
+    ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+    defer cancel()
+
+    response, err := c.AdmitirPaciente(ctx, &pb.PacienteRequest{
+        Registro:              registroPaciente,
+        NomeCompleto:          nomeCompleto,
+        Comorbidades:          comorbidades,
+        BasalPressaoMin:       basalPressaoMin,
+        BasalPressaoMax:       basalPressaoMax,
+        BasalSaturacaoMin:     basalSaturacaoMin,
+        BasalSaturacaoMax:     basalSaturacaoMax,
+        BasalFCMin:            basalFCMin,
+        BasalFCMax:            basalFCMax,
+        MedicacoesContinuas:   medicacoesContinuas,
+    })
+    if err != nil {
+        log.Fatalf("Erro ao chamar AdmitirPaciente: %v", err)
+    }
+    fmt.Printf("Paciente admitido: %s - %s\n", response.Registro, response.NomeCompleto)
+}
