@@ -6,7 +6,6 @@ Gabriel da silva oliveira Costa
 
 Lucas Ribeiro Moreira 
 
-**Resumo como sera executado o projeto**
 
 # Introdução 
 
@@ -25,6 +24,20 @@ A CardBand resolve esses problemas ao oferecer um bracelete inteligente capaz de
 # Sistema Integrado
 
 O sistema CardBand é projetado para integrar-se perfeitamente aos sistemas hospitalares existentes, proporcionando uma visão centralizada dos dados dos pacientes. A interface do usuário mostra de forma clara e organizada os pacientes atribuídos a cada profissional de saúde, junto com os dados vitais aferidos e alertas visuais em caso de variações críticas, garantindo uma gestão eficaz e segura dos cuidados de saúde.
+
+# Execução do Projeto CardBand
+
+O projeto CardBand será executado em fases estratégicas para garantir sua implementação eficiente e eficaz:
+
+**Desenvolvimento Tecnológico:** A equipe HSCoders desenvolverá o bracelete inteligente CardBand, focando na integração de sensores avançados para aferição precisa de dados vitais, como pressão arterial, frequência cardíaca, saturação e eletrocardiograma.
+
+**Integração e Testes:** O CardBand será integrado aos sistemas hospitalares existentes para assegurar compatibilidade e funcionalidade otimizada. Testes rigorosos serão conduzidos para validar a precisão dos dados coletados e a confiabilidade das funcionalidades automáticas de alerta.
+
+**Implementação Piloto:** Serão selecionados hospitais para implementação piloto do CardBand, onde a tecnologia será testada em ambiente real. Durante esta fase, serão coletados feedbacks de usuários e ajustes finos serão feitos para garantir a usabilidade e eficácia do sistema.
+
+**Escalonamento e Treinamento:** Após a validação bem-sucedida da fase piloto, o CardBand será gradualmente escalado para mais unidades de saúde. Treinamentos serão oferecidos aos profissionais de saúde para maximizar a adoção e uso eficaz da tecnologia.
+
+**Monitoramento Contínuo e Aprimoramento:** Um processo contínuo de monitoramento e avaliação será implementado para garantir que o CardBand atenda às necessidades dos usuários e mantenha altos padrões de desempenho. Novas atualizações e melhorias serão desenvolvidas conforme necessário para manter a competitividade e relevância no mercado de tecnologia médica.
 
 # Considerações finais
 
