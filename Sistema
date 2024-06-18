@@ -1,0 +1,87 @@
+# sistema.py
+
+import mysql.connector
+
+class Paciente:
+    def __init__(self, registro, nome_completo, comorbidades=None, pressao_basal=None, saturacao_basal=None, fc_basal=None, medicacoes_continuas=None):
+        self.registro = registro
+        self.nome_completo = nome_completo
+        self.comorbidades = comorbidades if comorbidades else []
+        self.pressao_basal = pressao_basal if pressao_basal else {'min': 100, 'max': 140}
+        self.saturacao_basal = saturacao_basal if saturacao_basal else {'min': 90, 'max': 100}
+        self.fc_basal = fc_basal if fc_basal else {'min': 60, 'max': 100}
+        self.medicacoes_continuas = medicacoes_continuas if medicacoes_continuas else []
+
+class Pulseira:
+    def __init__(self, identificador, id_paciente=None, tempo_programado=None):
+        self.identificador = identificador
+        self.id_paciente = id_paciente
+        self.tempo_programado = tempo_programado
+
+    def alterar_tempo_programado(self, novo_tempo):
+        self.tempo_programado = novo_tempo
+
+class Sistema:
+    def __init__(self):
+        self.conn = mysql.connector.connect(
+            host="localhost",
+            user="seu_usuario",
+            password="sua_senha",
+            database="hospital"
+        )
+        self.cursor = self.conn.cursor()
+
+    def admitir_paciente(self, registro, nome_completo, comorbidades=None, pressao_basal=None, saturacao_basal=None, fc_basal=None, medicacoes_continuas=None):
+        query = """
+            INSERT INTO pacientes (registro, nome_completo, comorbidades, basal_pressao_min, basal_pressao_max, basal_saturacao_min, basal_saturacao_max, basal_fc_min, basal_fc_max, medicacoes_continuas)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """
+        data = (
+            registro,
+            nome_completo,
+            ",".join(comorbidades) if comorbidades else None,
+            pressao_basal['min'] if pressao_basal else None,
+            pressao_basal['max'] if pressao_basal else None,
+            saturacao_basal['min'] if saturacao_basal else None,
+            saturacao_basal['max'] if saturacao_basal else None,
+            fc_basal['min'] if fc_basal else None,
+            fc_basal['max'] if fc_basal else None,
+            ",".join(medicacoes_continuas) if medicacoes_continuas else None
+        )
+        self.cursor.execute(query, data)
+        self.conn.commit()
+        return Paciente(registro, nome_completo, comorbidades, pressao_basal, saturacao_basal, fc_basal, medicacoes_continuas)
+
+    def associar_pulseira_a_paciente(self, identificador_pulseira, registro_paciente):
+        query = """
+            UPDATE pulseiras
+            SET id_paciente = %s
+            WHERE identificador = %s
+        """
+        data = (registro_paciente, identificador_pulseira)
+        self.cursor.execute(query, data)
+        self.conn.commit()
+
+    def quadro_de_horarios(self):
+        query = """
+            SELECT identificador, tempo_programado
+            FROM pulseiras
+            WHERE tempo_programado IS NOT NULL
+        """
+        self.cursor.execute(query)
+        rows = self.cursor.fetchall()
+        return [Pulseira(identificador=row[0], tempo_programado=row[1]) for row in rows]
+
+    def alta_de_paciente(self, registro_paciente):
+        query = """
+            DELETE FROM pacientes
+            WHERE registro = %s
+        """
+        self.cursor.execute(query, (registro_paciente,))
+        self.conn.commit()
+
+    def dados_antigos_do_paciente(self, registro_paciente, data_hora):
+        pass
+
+if __name__ == '__main__':
+    sistema = Sistema()
