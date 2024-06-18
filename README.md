@@ -25,6 +25,8 @@ A CardBand resolve esses problemas ao oferecer um bracelete inteligente capaz de
 
 O sistema CardBand é projetado para integrar-se perfeitamente aos sistemas hospitalares existentes, proporcionando uma visão centralizada dos dados dos pacientes. A interface do usuário mostra de forma clara e organizada os pacientes atribuídos a cada profissional de saúde, junto com os dados vitais aferidos e alertas visuais em caso de variações críticas, garantindo uma gestão eficaz e segura dos cuidados de saúde.
 
+![image](https://github.com/GabrielCosta-99/CardBand/assets/128004263/90a38b96-fc12-478a-bca3-8087f2a391ff)
+
 # Execução do Projeto CardBand
 
 O projeto CardBand será executado em fases estratégicas para garantir sua implementação eficiente e eficaz:
