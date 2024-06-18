@@ -1,0 +1,19 @@
+CREATE TABLE pacientes (
+    registro VARCHAR(10) PRIMARY KEY,
+    nome_completo VARCHAR(100),
+    comorbidades TEXT,
+    basal_pressao_min INT,
+    basal_pressao_max INT,
+    basal_saturacao_min INT,
+    basal_saturacao_max INT,
+    basal_fc_min INT,
+    basal_fc_max INT,
+    medicacoes_continuas TEXT
+);
+
+CREATE TABLE pulseiras (
+    identificador VARCHAR(10) PRIMARY KEY,
+    id_paciente VARCHAR(10),
+    tempo_programado DATETIME,
+    FOREIGN KEY (id_paciente) REFERENCES pacientes(registro)
+);
